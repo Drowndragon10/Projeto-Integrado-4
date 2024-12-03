@@ -11,20 +11,20 @@ const registerUser = async (req, res) => {
 
     // Validate request body
     if (!username || !email || !password) {
-      return res.status(400).json({ error: 'All fields are required: username, email, password.' });
+      return res.status(400).json({ error: 'É obrigatório preencher todos os campos.' });
     }
 
     // Check if the user already exists
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      return res.status(409).json({ error: 'User with this email already exists.' });
+      return res.status(409).json({ error: 'Já existe um utilizador com este e-mail..' });
     }
 
     // Create a new user
     const newUser = await User.create({ username, email, password });
 
     return res.status(201).json({
-      message: 'User registered successfully!',
+      message: 'Utilizador registado com sucesso!',
       user: {
         id: newUser.id,
         username: newUser.username,
@@ -33,7 +33,7 @@ const registerUser = async (req, res) => {
     });
   } catch (error) {
     console.error('Error registering user:', error);
-    return res.status(500).json({ error: 'Internal server error.' });
+    return res.status(500).json({ error: 'Erro interno do servidor.' });
   }
 };
 
