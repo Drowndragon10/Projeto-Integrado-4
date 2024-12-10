@@ -1,56 +1,47 @@
-// Importando as dependências
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+// Importar as rotas
+const equipaRoutes = require('./routes/EquipaRoute');
+const escalacaoRoutes = require('./routes/EscalaoRoute');
+const jogadorRoutes = require('./routes/JogadorRoute');
+const utilizadorRoutes = require('./routes/UtilizadorRoute');
+const conviteRoutes = require('./routes/ConviteRoute');
+const registoRoutes = require('./routes/RegistoRoute');
+const tarefaRoutes = require('./routes/TarefaRoute');
+const jogoRoutes = require('./routes/JogoRoute');
+const relatorioRoutes = require('./routes/RelatorioRoute');
+const loginRoutes = require('./routes/LoginRoute'); // Importar a rota de login
+
+// Inicializar o app
 const app = express();
-const cors = require('cors');  // Para permitir requisições de origens diferentes, se necessário
-
-// Importando as rotas (Controllers)
-const criarEquipaRoutes = require('./routes/criar_equipa');
-const CriarEscalaoRoutes = require('./routes/criar_escalao');
-const criarJogadorRoutes = require('./routes/criar_jogador');
-const CriarJogoRoutes = require('./routes/criar_jogo');
-const CriarRelatorioRoutes = require('./routes/criar_relatorio');
-const CriarTarefaRoutes = require('./routes/criar_tarefa');
-const EliminarEquipaRoutes = require('./routes/eliminar_equipa');
-const EliminarEscalaoRoutes = require('./routes/eliminar_escalo');
-const EliminarJogadorRoutes = require('./routes/eliminar_jogador');
-const EliminarJogoRoutes = require('./routes/eliminar_jogo');
-const EliminarRelatorioRoutes = require('./routes/eliminar_relatorio');
-const EliminarTarefaRoutes = require('./routes/eliminar_tarefa');
-const loginRoutes = require('./routes/login');
-
-// Configurações
-app.set('port', process.env.PORT || 3000);
 
 // Middlewares
-app.use(express.json());  // Para processar os dados JSON
-app.use(cors());  // Para permitir que seu frontend faça requisições, se necessário
+app.use(cors()); // Permitir CORS
+app.use(bodyParser.json()); // Parse JSON
 
-// Definindo as rotas
-app.use('api/criar_equipa', criarEquipaRoutes);  // Para a funcionalidade de criação de equipes
-app.use('/api/criar_escalao', CriarEscalaoRoutes);
-app.use('/api/criar_jogador', criarJogadorRoutes);  // Para a funcionalidade de criação de jogadores
-app.use('/api/criar_jogo', CriarJogoRoutes);
-app.use('/api/criar_relatorio', CriarRelatorioRoutes);
-app.use('/api/criar_tarefa', CriarTarefaRoutes);
-app.use('/api/eliminar_equipa', EliminarEquipaRoutes);
-app.use('/api/eliminar_escalao', EliminarEscalaoRoutes);
-app.use('/api/eliminar_jogador', EliminarJogadorRoutes);
-app.use('/api/eliminar_jogo', EliminarJogoRoutes);
-app.use('/api/eliminar_relatorio', EliminarRelatorioRoutes);
-app.use('/api/eliminar_tarefa', EliminarTarefaRoutes);
-app.use('/api/login', loginRoutes);  // Rota de login
+// Usar as rotas importadas
+app.use('/api/equipas', equipaRoutes);
+app.use('/api/escalacoes', escalacaoRoutes);
+app.use('/api/jogadores', jogadorRoutes);
+app.use('/api/utilizadores', UtilizadorRoutes);
+app.use('/api/convites', conviteRoutes);
+app.use('/api/registos', registoRoutes);
+app.use('/api/tarefas', tarefaRoutes);
+app.use('/api/jogos', jogoRoutes);
+app.use('/api/relatorios', relatorioRoutes);
+app.use('/api/login', loginRoutes); // Definir a rota de login
 
-// Rota teste (você pode remover ou deixar como exemplo)
-app.use('/teste', (req, res) => {
-    res.send("Rota TESTE.");
+// Rota inicial de teste
+app.get('/', (req, res) => {
+  res.send('API está funcionando!');
 });
 
-// Rota padrão (Hello World)
-app.use('/', (req, res) => {
-    res.send("Hello World");
+// Middleware de erro
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: 'Erro interno do servidor.' });
 });
 
-// Inicializando o servidor
-app.listen(app.get('port'), () => {
-    console.log("Servidor iniciado na porta " + app.get('port'));
-});
+module.exports = app;
