@@ -1,20 +1,17 @@
-// src/App.js
+// frontend/src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegistoPage';
-import DashboardPage from './pages/DashboardPage';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
     <Router>
-      <div>
-        <Switch>
-          <Route path="/login" component={LoginPage} />
-          <Route path="/register" component={RegisterPage} />
-          <Route path="/dashboard" component={DashboardPage} />
-        </Switch>
-      </div>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
     </Router>
   );
 }

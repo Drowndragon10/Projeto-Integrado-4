@@ -1,27 +1,13 @@
-// src/pages/DashboardPage.js
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+// frontend/src/pages/dashboard.js
+import React from 'react';
 
-const DashboardPage = () => {
-  const [userInfo, setUserInfo] = useState(null);
-  const history = useHistory();
-
-  useEffect(() => {
-    const token = localStorage.getItem('token'); // Recuperar o token do localStorage
-    if (!token) {
-      history.push('/login'); // Redireciona para o login caso o token não exista
-    } else {
-      // Aqui você pode fazer uma requisição para buscar informações do usuário, se necessário
-      setUserInfo({ name: 'João', email: 'joao@example.com' }); // Exemplo de usuário
-    }
-  }, [history]);
-
+function Dashboard() {
   return (
-    <div>
-      <h1>Bem-vindo, {userInfo ? userInfo.name : 'Usuário'}</h1>
-      <p>Email: {userInfo ? userInfo.email : 'Carregando...'}</p>
+    <div style={{ padding: '20px' }}>
+      <h1>Dashboard</h1>
+      <p>Bem-vindo ao Dashboard!</p>
     </div>
   );
-};
+}
 
-export default DashboardPage;
+export default Dashboard;

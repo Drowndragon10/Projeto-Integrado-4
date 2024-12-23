@@ -1,51 +1,56 @@
-// src/pages/LoginPage.js
+// frontend/src/pages/loginpage.js
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import './loginpage.css'; // Certifique-se de que o CSS está no mesmo diretório
 
-const LoginPage = () => {
+function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:5000/login', {
-        email,
-        password
-      });
-
-      // Armazenar o token no localStorage após login
-      localStorage.setItem('token', response.data.token);  // Armazenar token no localStorage
-
-      // Redirecionar para o Dashboard ou página protegida
-      history.push('/dashboard'); 
-    } catch (error) {
-      console.error('Erro ao fazer login', error);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    // Aqui você pode adicionar a lógica de autenticação, por exemplo, uma chamada à API
+    // Para este exemplo, vamos simular uma autenticação bem-sucedida
+    if (email === 'admin@viriatos.com' && password === 'senha123') {
+      // Redireciona para o dashboard após o login bem-sucedido
+      navigate('/dashboard');
+    } else {
+      setError('Email ou senha incorretos.');
     }
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Senha"
-        />
-        <button type="submit">Entrar</button>
-      </form>
+    <div className="login-container">
+      <div className="logo-section">
+        <img src="/logo.png" alt="Viriatos Scouting Logo" className="logo" />
+        <h1>Viriatos Scouting</h1>
+      </div>
+      <div className="form-section">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Palavra-passe"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          {error && <p className="error-message">{error}</p>}
+          <button type="submit">Login</button>
+        </form>
+      </div>
     </div>
   );
-};
+}
 
 export default LoginPage;
