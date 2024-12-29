@@ -1,0 +1,93 @@
+/* Estilos gerais */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .register-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  /* Área da esquerda */
+  .left-section {
+    flex: 1;
+    background-color: #1c1c1c;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .left-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+  
+  .left-section .logo {
+    width: 150px;
+  }
+  
+  /* Linha diagonal */
+  .left-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #ffd700;
+    transform: rotate(45deg);
+    transform-origin: top right;
+  }
+  
+  /* Área da direita */
+  .right-section {
+    flex: 1;
+    background-color: #282828;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .right-section h2 {
+    color: #ffd700;
+    margin-bottom: 10px;
+  }
+  
+  .right-section p {
+    text-align: center;
+    margin-bottom: 20px;
+    max-width: 400px;
+  }
+  
+  /* Formulário */
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .input-field {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  .btn-register {
+    padding: 10px 15px;
+    background-color: #ffd700;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

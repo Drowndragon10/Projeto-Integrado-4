@@ -10,6 +10,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/new-user" element={<NewUserPage />} />
+        <Route path="/register" element={<RegisterPage />} /> {/* Nova rota */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
