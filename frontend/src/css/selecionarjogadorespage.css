@@ -1,0 +1,66 @@
+/* Estilo geral */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: white;
+  }
+  
+  /* Container principal */
+  .select-players-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  header h1 {
+    font-size: 2rem;
+    color: #ffc107;
+    margin-bottom: 20px;
+  }
+  
+  .players-list {
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .player-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #444;
+  }
+  
+  .player-item:last-child {
+    border-bottom: none;
+  }
+  
+  .player-item label {
+    display: flex;
+    align-items: center;
+  }
+  
+  .player-item input {
+    margin-right: 10px;
+  }
+  
+  .btn-submit {
+    width: 100%;
+    background-color: #ffc107;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  .btn-submit:hover {
+    background-color: #e0a800;
+  }
+  
